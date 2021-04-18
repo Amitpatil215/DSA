@@ -26,6 +26,12 @@ public:
         this->rollNumber = rollNumber;
     }
 
+    // default destructor
+    ~Student()
+    {
+        cout << "destructor called"<< endl;
+    }
+
     void display()
     {
         cout << age << " "
