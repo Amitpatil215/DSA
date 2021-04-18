@@ -17,5 +17,11 @@ int main()
     cout << (*s6).rollNumber << endl;
 
     s3.display();
+
+
+    //calling parametrized constructor
+    cout<<"Parametrized constructor demo"<<endl;
+    Student s5(20);
+    s5.display();
     return 0;
 }
