@@ -13,4 +13,8 @@ int main()
 
     s3->display();
     s2.display();
+
+    /// static memories is deleted automatically
+    /// for dynamic memory we have to destruct manually
+    delete s3;
 }
