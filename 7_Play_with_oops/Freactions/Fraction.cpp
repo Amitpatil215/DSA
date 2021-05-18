@@ -31,6 +31,11 @@ public:
         simplify();
     }
 
+    void multiply(Fraction const &f2){
+        num=num*f2.num;
+        den=den*f2.den;
+    }
+
     void simplify()
     {
         int gcd = 1;
