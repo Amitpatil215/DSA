@@ -3,6 +3,9 @@ using namespace std;
 
 int fact(int n)
 {
+    // factorial for negative numbers is not defiend
+    if (n < 0)
+        return -1;
     if (n == 0)
         // terminate recursion on reahcing 0
         // factorial of 0 is 1
