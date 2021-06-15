@@ -32,9 +32,23 @@ bool isSorted2(int a[], int n)
     return a[0] > a[1] ? false : true;
 }
 
+bool isSorted3(int a[], int n)
+{
+
+    if (a[n - 2] > a[n - 1])
+    {
+        return false;
+    }
+    bool isSmallerSorted = isSorted(a, n - 1);
+
+    return isSmallerSorted;
+}
+
 int main()
 {
     int a[] = {1, 2, 3, 4, 5};
-    cout << isSorted2(a, 5);
+    int b[] = {1, 2, 3, 10, 4, 5};
+    cout << isSorted3(a, 5) << endl;
+    cout << isSorted3(b, 5) << endl;
     return 0;
 }
