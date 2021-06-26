@@ -69,7 +69,18 @@ int main()
     v.push_back(5);
     v.push_back(8);
     int target = 4;
-    cout << getFirst(v, target) << endl;
-    cout << getLast(v, target) << endl;
+    vector<int> ans(2, -1);
+    int firstIndex = getFirst(v, target);
+    if (firstIndex == -1)
+    {
+        cout << ans[0] << " " << ans[1] << endl;
+        return 0;
+    }
+    int lastIndex = getLast(v, target);
+    ans[0] = firstIndex;
+    ans[1] = lastIndex;
+
+    cout << ans[0] << " " << ans[1] << endl;
+
     return 0;
 }
