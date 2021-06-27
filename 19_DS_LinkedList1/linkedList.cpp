@@ -18,10 +18,11 @@ public:
 
 void print(Node *head)
 {
-    while (head != NULL)
+    Node *temp = head;
+    while (temp != NULL)
     {
-        cout << head->data << " ";
-        head = head->next;
+        cout << temp->data << " ";
+        temp = temp->next;
     }
 }
 
@@ -49,5 +50,4 @@ int main()
     N4.next = &N5;
 
     print(head);
-
 }
