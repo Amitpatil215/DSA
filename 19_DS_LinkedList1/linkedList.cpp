@@ -21,11 +21,12 @@ void print(Node *head)
     Node *temp = head;
     while (temp != NULL)
     {
-        cout << temp->data << " ";
+        cout << temp->data << " -> ";
         temp = temp->next;
     }
 }
 
+/// inserting at head
 Node *takeInput()
 {
     int data;
@@ -49,6 +50,43 @@ Node *takeInput()
         cin >> data;
     }
     return head;
+}
+
+/// inserting at tail
+Node *takeInputFromTail()
+{
+    int data;
+    Node *head = NULL;
+    Node *tail = NULL;
+    cin >> data;
+    while (data != -1)
+    {
+        Node *n = new Node(data);
+        // we have alredy some nodes in linked list
+        if (head != NULL)
+        {
+            n->next = head;
+            head = n;
+        }
+        else
+        {
+            head = n;
+            tail = n;
+        }
+        cin >> data;
+    }
+    return head;
+}
+
+int length(Node *head)
+{
+    int len = 0;
+    while (head) //while head exist similar to when head!=NULL
+    {
+        len++;
+        head = head->next;
+    }
+    return len;
 }
 
 int main()
@@ -76,5 +114,8 @@ int main()
 
     print(head);
     cout << endl;
-    print(takeInput());
+    // print(takeInput()); //take input from head
+    // print(takeInputFromTail()); //take input from tail
+
+    cout << length(takeInputFromTail());
 }
