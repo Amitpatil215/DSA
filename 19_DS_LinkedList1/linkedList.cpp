@@ -27,7 +27,7 @@ void print(Node *head)
 }
 
 /// inserting at head
-Node *takeInput()
+Node *takeInput() /// O(n)
 {
     int data;
     Node *head = NULL;
@@ -53,7 +53,7 @@ Node *takeInput()
 }
 
 /// inserting at tail
-Node *takeInputFromTail()
+Node *takeInputFromTail() /// O(n)
 {
     int data;
     Node *head = NULL;
@@ -78,7 +78,7 @@ Node *takeInputFromTail()
     return head;
 }
 
-int length(Node *head)
+int length(Node *head) ///Complexity O(N)
 {
     int len = 0;
     while (head) //while head exist similar to when head!=NULL
