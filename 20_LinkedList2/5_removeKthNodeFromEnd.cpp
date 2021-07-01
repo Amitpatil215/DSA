@@ -50,8 +50,9 @@ void print(Node *head)
     }
 }
 
-void removeKthElement(Node *head, int k)
+Node *removeKthElement(Node *head, int k)
 {
+    Node *copyHead = head;
     Node *one = head;
     Node *two = head;
     while (k--)
@@ -59,21 +60,34 @@ void removeKthElement(Node *head, int k)
         two = two->next;
     }
 
-    while (two->next != NULL)
+    if (two == NULL) //when length of LL == K
     {
-        two = two->next;
-        one = one->next;
+        Node *temp = head;
+        head = head->next;
+        delete temp;
+        return head;
     }
 
-    Node *temp = one->next;
-    one->next = one->next->next;
-    delete temp;
+    else
+    {
+
+        while (two->next != NULL)
+        {
+            two = two->next;
+            one = one->next;
+        }
+
+        Node *temp = one->next;
+        one->next = one->next->next;
+        delete temp;
+        return copyHead;
+    }
 }
 
 int main()
 {
     Node *head = takeInput();
-    removeKthElement(head, 2);
-    print(head);
+    print(removeKthElement(head, 2));
+
     return 0;
 }
