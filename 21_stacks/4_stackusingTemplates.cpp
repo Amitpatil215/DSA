@@ -58,7 +58,7 @@ public:
         if (isEmpty())
         {
             cout << "Stack is empty" << endl;
-            return -1;
+            return 0; // 0 can behave as any datatype
         }
         return arr[nextIndex - 1];
     }
