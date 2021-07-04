@@ -1,0 +1,3 @@
+
+            st.push(str[i]);
+        
