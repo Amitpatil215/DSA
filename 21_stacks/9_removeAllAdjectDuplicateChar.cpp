@@ -29,6 +29,8 @@ string removeAllAdjecentDuplicateChar(string str)
     return ans;
 }
 
+// T=O(n)
+// S=O(1)
 string removeAllAdjecentDuplicateCharBySimulatingStack(string str)
 {
     int stptr = -1;
