@@ -34,14 +34,27 @@ void printTree(TreeNode<int> *root)
     }
 }
 
+TreeNode<int> *takeInputUsingRecursion()
+{
+    int rootData;
+    cout << "Enter Data" << endl;
+    cin >> rootData;
+
+    TreeNode<int> *root = new TreeNode<int>(rootData);
+    int childrenSize;
+    cout << "Enter the no of children of " << rootData << endl;
+    cin >> childrenSize;
+    for (int i = 0; i < childrenSize; i++)
+    {
+        TreeNode<int> *child = takeInputUsingRecursion();
+        root->children.push_back(child);
+    }
+    return root;
+}
+
 int main()
 {
-    TreeNode<int> *root = new TreeNode<int>(1);
-    TreeNode<int> *n1 = new TreeNode<int>(2);
-    TreeNode<int> *n2 = new TreeNode<int>(3);
-
-    root->children.push_back(n1);
-    root->children.push_back(n2);
+    TreeNode<int> *root = takeInputUsingRecursion();
     printTree(root);
     return 0;
 }
