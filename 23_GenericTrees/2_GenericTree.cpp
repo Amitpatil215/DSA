@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 using namespace std;
 
 template <typename T>
@@ -52,9 +53,44 @@ TreeNode<int> *takeInputUsingRecursion()
     return root;
 }
 
+TreeNode<int> *takeInputLevelWise()
+{
+    int rootData;
+    cout << "Enter root data" << endl;
+    cin >> rootData;
+
+    //create node
+    TreeNode<int> *root = new TreeNode<int>(rootData);
+    //Push
+    queue<TreeNode<int> *> q;
+    q.push(root);
+    while (!q.empty())
+    {
+        TreeNode<int> *front = q.front();
+        q.pop();
+        int n;
+        cout << "Enter no of childrens of " << front->data << endl;
+        cin >> n;
+        for (int i = 0; i < n; i++)
+        {
+            int childData;
+            cout << "Enter " << i << " th child of " << front->data << endl;
+            cin >> childData;
+
+            //create
+            TreeNode<int> *childNode = new TreeNode<int>(childData);
+            //push
+            q.push(childNode);
+            // Connection
+            front->children.push_back(childNode);
+        }
+    }
+}
+
 int main()
 {
-    TreeNode<int> *root = takeInputUsingRecursion();
+    //TreeNode<int> *root = takeInputUsingRecursion();
+    TreeNode<int> *root = takeInputLevelWise();
     printTree(root);
     return 0;
 }
