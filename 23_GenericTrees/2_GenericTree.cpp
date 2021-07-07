@@ -141,7 +141,7 @@ int height(TreeNode<int> *root)
 void printNodesAtDepthK(TreeNode<int> *root, int k)
 {
     if (root == NULL)
-        return ;
+        return;
 
     if (k == 0)
     {
@@ -154,7 +154,22 @@ void printNodesAtDepthK(TreeNode<int> *root, int k)
         printNodesAtDepthK(root->children[i], k - 1);
     }
 }
-
+int countLeafNodes(TreeNode<int> *root)
+{
+    if (root == NULL)
+        return 0;
+    if (root->children.size() == 0)
+    {
+        return 1;
+    }
+    int count = 0;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        count += countLeafNodes(root->children[i]);
+    }
+    return count;
+}
+// 1 3 2 3 4 2 5 6 2 7 8 0 0 0 0 1 9 0
 int main()
 {
     //TreeNode<int> *root = takeInputUsingRecursion();
@@ -162,6 +177,7 @@ int main()
     // levelOrderPrint(root);
     // cout << countNodes(root) << endl;
     // cout << height(root) << endl;
-    printNodesAtDepthK(root, 2);
+    // printNodesAtDepthK(root, 2);
+    cout << countLeafNodes(root) << endl;
     return 0;
 }
