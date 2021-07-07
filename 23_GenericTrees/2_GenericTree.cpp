@@ -107,10 +107,21 @@ void levelOrderPrint(TreeNode<int> *root)
         }
     }
 }
+
+int countNodes(TreeNode<int> *root)
+{
+    int count = 1;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        count += countNodes(root->children[i]);
+    }
+    return count;
+}
 int main()
 {
     //TreeNode<int> *root = takeInputUsingRecursion();
     TreeNode<int> *root = takeInputLevelWise();
-    levelOrderPrint(root);
+    // levelOrderPrint(root);
+    cout << countNodes(root) << endl;
     return 0;
 }
