@@ -121,11 +121,29 @@ int countNodes(TreeNode<int> *root)
     }
     return count;
 }
+
+int height(TreeNode<int> *root)
+{
+    //edge case
+    if (root == NULL)
+        return 0;
+    int maxHeight = 0;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        int childHeight = height(root->children[i]);
+        if (childHeight >= maxHeight)
+            maxHeight = childHeight;
+    }
+    //add +1 to max height to count root node also
+    return maxHeight + 1;
+}
+
 int main()
 {
     //TreeNode<int> *root = takeInputUsingRecursion();
     TreeNode<int> *root = takeInputLevelWise();
     // levelOrderPrint(root);
-    cout << countNodes(root) << endl;
+    // cout << countNodes(root) << endl;
+    cout << height(root) << endl;
     return 0;
 }
