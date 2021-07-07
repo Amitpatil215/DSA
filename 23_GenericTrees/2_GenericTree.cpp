@@ -14,6 +14,14 @@ public:
     {
         this->data = data;
     }
+
+    ~TreeNode()
+    {
+        for (int i = 0; i < children.size(); i++)
+        {
+            delete children[i];
+        }
+    }
 };
 
 void printTree(TreeNode<int> *root)
@@ -214,7 +222,8 @@ int main()
     // printNodesAtDepthK(root, 2);
     //cout << countLeafNodes(root) << endl;
     // preOrderTraversal(root);
-    deleteTree(root);
+    // deleteTree(root);
+    delete root; // call's custom destructor
     postOrderTraversal(root);
     return 0;
 }
