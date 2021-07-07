@@ -110,6 +110,10 @@ void levelOrderPrint(TreeNode<int> *root)
 
 int countNodes(TreeNode<int> *root)
 {
+    //edge case
+    if (root == NULL)
+        return 0;
+
     int count = 1;
     for (int i = 0; i < root->children.size(); i++)
     {
