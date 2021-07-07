@@ -169,6 +169,16 @@ int countLeafNodes(TreeNode<int> *root)
     }
     return count;
 }
+void preOrderTraversal(TreeNode<int> *root)
+{
+    if (root == NULL)
+        return;
+    cout << root->data << " ";
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        preOrderTraversal(root->children[i]);
+    }
+}
 // 1 3 2 3 4 2 5 6 2 7 8 0 0 0 0 1 9 0
 int main()
 {
@@ -178,6 +188,7 @@ int main()
     // cout << countNodes(root) << endl;
     // cout << height(root) << endl;
     // printNodesAtDepthK(root, 2);
-    cout << countLeafNodes(root) << endl;
+    //cout << countLeafNodes(root) << endl;
+    preOrderTraversal(root);
     return 0;
 }
