@@ -192,6 +192,17 @@ void postOrderTraversal(TreeNode<int> *root)
     cout << root->data << " ";
 }
 
+void deleteTree(TreeNode<int> *root)
+{
+    if (root == NULL)
+        return;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        deleteTree(root->children[i]);
+    }
+    delete root;
+}
+
 // 1 3 2 3 4 2 5 6 2 7 8 0 0 0 0 1 9 0
 int main()
 {
@@ -203,6 +214,7 @@ int main()
     // printNodesAtDepthK(root, 2);
     //cout << countLeafNodes(root) << endl;
     // preOrderTraversal(root);
+    deleteTree(root);
     postOrderTraversal(root);
     return 0;
 }
