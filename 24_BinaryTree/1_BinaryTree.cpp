@@ -39,14 +39,36 @@ void printTreeRecursive(BTNode<int> *root)
     printTreeRecursive(root->right);
 }
 
+BTNode<int> *takeInputRecursive()
+{
+    int rootData;
+    cout << "Enter data" << endl;
+    cin >> rootData;
+    if (rootData == -1)
+        return NULL;
+    // create root Node
+    BTNode<int> *root = new BTNode<int>(rootData);
+
+    // take input for left node
+    BTNode<int> *leftChild = takeInputRecursive();
+    // take input for right node
+    BTNode<int> *rightChild = takeInputRecursive();
+
+    // connect
+    root->left = leftChild;
+    root->right = rightChild;
+}
+
 int main()
 {
-    BTNode<int> *root = new BTNode<int>(1);
-    BTNode<int> *n1 = new BTNode<int>(2);
-    BTNode<int> *n2 = new BTNode<int>(3);
+    // BTNode<int> *root = new BTNode<int>(1);
+    // BTNode<int> *n1 = new BTNode<int>(2);
+    // BTNode<int> *n2 = new BTNode<int>(3);
 
-    root->left = n1;
-    root->right = n2;
+    // root->left = n1;
+    // root->right = n2;
+
+    BTNode<int> *root = takeInputRecursive(); // 1 2 -1 -1 3 -1 -1
     printTreeRecursive(root);
     delete root;
     return 0;
