@@ -144,7 +144,14 @@ int countNode(BTNode<int> *root)
     }
     return 1 + countNode(root->left) + countNode(root->right);
 }
-
+void InOrderTrraversal(BTNode<int> *root)
+{
+    if (root == NULL)
+        return;
+    InOrderTrraversal(root->left);  // left
+    cout << root->data;             // data
+    InOrderTrraversal(root->right); // right
+}
 int main()
 {
     // BTNode<int> *root = new BTNode<int>(1);
@@ -158,9 +165,10 @@ int main()
     BTNode<int> *root = takeInputLevelWise(); // 1 2 3 -1 -1 -1 -1
 
     // printTreeRecursive(root);
-    printTreeLevelWise(root);
-    cout
-        << "Nodes Count " << countNode(root) << endl;
+    //printTreeLevelWise(root);
+    InOrderTrraversal(root);
+    // cout
+    //     << "Nodes Count " << countNode(root) << endl;
     delete root;
     return 0;
 }
