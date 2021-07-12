@@ -168,6 +168,18 @@ void PostOrderTrraversal(BTNode<int> *root)
     PostOrderTrraversal(root->right); // right
     cout << root->data;               // data
 }
+
+int maxDepth(BTNode<int> *root)
+{
+
+    if (root == NULL)
+        return 0;
+
+    int leftHeight = maxDepth(root->left);
+    int rightHeight = maxDepth(root->right);
+    return max(leftHeight, rightHeight) + 1;
+}
+
 int main()
 {
     // BTNode<int> *root = new BTNode<int>(1);
@@ -184,7 +196,8 @@ int main()
     //printTreeLevelWise(root);
     // InOrderTrraversal(root);
     // PreOrderTrraversal(root);
-    PostOrderTrraversal(root);
+    // PostOrderTrraversal(root);
+    cout << "Max height " << maxDepth(root) << endl;
     // cout
     //     << "Nodes Count " << countNode(root) << endl;
     delete root;
