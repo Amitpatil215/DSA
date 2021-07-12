@@ -100,6 +100,43 @@ BTNode<int> *takeInputLevelWise()
     return root;
 }
 
+void printTreeLevelWise(BTNode<int> *root)
+{
+    if (root == NULL)
+        return;
+    queue<BTNode<int> *> q;
+    q.push(root);
+    q.push(NULL);
+    while (!q.empty())
+    {
+        BTNode<int> *front = q.front();
+
+        q.pop();
+
+        if (front == NULL)
+        {
+            cout << endl;
+            if (!q.empty())
+            {
+                q.push(NULL);
+            }
+        }
+        else
+        {
+            cout << front->data << " ";
+
+            if (front->left)
+            {
+                q.push(front->left);
+            }
+            if (front->right)
+            {
+                q.push(front->right);
+            }
+        }
+    }
+}
+
 int main()
 {
     // BTNode<int> *root = new BTNode<int>(1);
@@ -112,7 +149,8 @@ int main()
     // BTNode<int> *root = takeInputRecursive(); // 1 2 -1 -1 3 -1 -1
     BTNode<int> *root = takeInputLevelWise(); // 1 2 3 -1 -1 -1 -1
 
-    printTreeRecursive(root);
+    // printTreeRecursive(root);
+    printTreeLevelWise(root);
     delete root;
     return 0;
 }
