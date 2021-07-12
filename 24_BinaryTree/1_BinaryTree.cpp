@@ -160,6 +160,14 @@ void PreOrderTrraversal(BTNode<int> *root)
     PreOrderTrraversal(root->left);  // left
     PreOrderTrraversal(root->right); // right
 }
+void PostOrderTrraversal(BTNode<int> *root)
+{
+    if (root == NULL)
+        return;
+    PostOrderTrraversal(root->left);  // left
+    PostOrderTrraversal(root->right); // right
+    cout << root->data;               // data
+}
 int main()
 {
     // BTNode<int> *root = new BTNode<int>(1);
@@ -175,7 +183,8 @@ int main()
     // printTreeRecursive(root);
     //printTreeLevelWise(root);
     // InOrderTrraversal(root);
-    PreOrderTrraversal(root);
+    // PreOrderTrraversal(root);
+    PostOrderTrraversal(root);
     // cout
     //     << "Nodes Count " << countNode(root) << endl;
     delete root;
