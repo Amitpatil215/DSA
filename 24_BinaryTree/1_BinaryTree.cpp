@@ -136,6 +136,14 @@ void printTreeLevelWise(BTNode<int> *root)
         }
     }
 }
+int countNode(BTNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    return 1 + countNode(root->left) + countNode(root->right);
+}
 
 int main()
 {
@@ -151,6 +159,8 @@ int main()
 
     // printTreeRecursive(root);
     printTreeLevelWise(root);
+    cout
+        << "Nodes Count " << countNode(root) << endl;
     delete root;
     return 0;
 }
