@@ -110,7 +110,7 @@ int main()
     // root->right = n2;
 
     // BTNode<int> *root = takeInputRecursive(); // 1 2 -1 -1 3 -1 -1
-    BTNode<int> *root = takeInputLevelWise(); // 1 2 -1 -1 3 -1 -1
+    BTNode<int> *root = takeInputLevelWise(); // 1 2 3 -1 -1 -1 -1
 
     printTreeRecursive(root);
     delete root;
