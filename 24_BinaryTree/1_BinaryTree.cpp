@@ -59,6 +59,47 @@ BTNode<int> *takeInputRecursive()
     root->right = rightChild;
 }
 
+BTNode<int> *takeInputLevelWise()
+{
+    // For first root Node
+    int rootData;
+    cout << "enter root data" << endl;
+    cin >> rootData;
+    BTNode<int> *root = new BTNode<int>(rootData);
+    queue<BTNode<int> *> q;
+    q.push(root);
+
+    // for remaining tree
+    while (!q.empty())
+    {
+        BTNode<int> *front = q.front();
+        q.pop();
+        // take input for left child
+        cout << "Enter left child of " << front->data << endl;
+
+        int leftChildData;
+        cin >> leftChildData;
+        if (leftChildData != -1)
+        {
+            BTNode<int> *leftChild = new BTNode<int>(leftChildData);
+            q.push(leftChild);
+            front->left = leftChild;
+        }
+
+        // take input for right child
+        cout << "Enter right child of " << front->data << endl;
+        int rightChildData;
+        cin >> rightChildData;
+        if (rightChildData != -1)
+        {
+            BTNode<int> *rightChild = new BTNode<int>(rightChildData);
+            q.push(rightChild);
+            front->right = rightChild;
+        }
+    }
+    return root;
+}
+
 int main()
 {
     // BTNode<int> *root = new BTNode<int>(1);
@@ -68,7 +109,9 @@ int main()
     // root->left = n1;
     // root->right = n2;
 
-    BTNode<int> *root = takeInputRecursive(); // 1 2 -1 -1 3 -1 -1
+    // BTNode<int> *root = takeInputRecursive(); // 1 2 -1 -1 3 -1 -1
+    BTNode<int> *root = takeInputLevelWise(); // 1 2 -1 -1 3 -1 -1
+
     printTreeRecursive(root);
     delete root;
     return 0;
