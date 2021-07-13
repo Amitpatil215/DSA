@@ -180,7 +180,7 @@ int maxDepth(BTNode<int> *root)
     return max(leftHeight, rightHeight) + 1;
 }
 
-int main()
+/* int main()
 {
     // BTNode<int> *root = new BTNode<int>(1);
     // BTNode<int> *n1 = new BTNode<int>(2);
@@ -203,3 +203,4 @@ int main()
     delete root;
     return 0;
 }
+ */
