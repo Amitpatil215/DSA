@@ -180,7 +180,18 @@ int maxDepth(BTNode<int> *root)
     return max(leftHeight, rightHeight) + 1;
 }
 
-/* int main()
+bool isNodePresent(BTNode<int> *root, int data)
+{
+    if (root == NULL)
+        return false;
+    if (root->data == data)
+    {
+        return true;
+    }
+    return isNodePresent(root->left, data) || isNodePresent(root->right, data);
+}
+
+int main()
 {
     // BTNode<int> *root = new BTNode<int>(1);
     // BTNode<int> *n1 = new BTNode<int>(2);
@@ -197,10 +208,10 @@ int maxDepth(BTNode<int> *root)
     // InOrderTrraversal(root);
     // PreOrderTrraversal(root);
     // PostOrderTrraversal(root);
-    cout << "Max height " << maxDepth(root) << endl;
+    cout << isNodePresent(root, 3);
+    // cout << "Max height " << maxDepth(root) << endl;
     // cout
     //     << "Nodes Count " << countNode(root) << endl;
     delete root;
     return 0;
 }
- */
