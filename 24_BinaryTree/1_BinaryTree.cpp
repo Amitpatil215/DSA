@@ -209,6 +209,19 @@ int findMaxValue(BTNode<int> *root)
     return max(rootData, max(leftMin, rightMin));
 }
 
+int countLeafNode(BTNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    if (root->left == NULL && root->right==NULL)
+    {
+        return 1;
+    }
+    return countLeafNode(root->left) + countLeafNode(root->right);
+}
+
 int main()
 {
     // BTNode<int> *root = new BTNode<int>(1);
@@ -228,7 +241,8 @@ int main()
     // PostOrderTrraversal(root);
     // cout << isNodePresent(root, 3);
     // cout << findMinValue(root);
-    cout << findMaxValue(root);
+    // cout << findMaxValue(root);
+    cout << countLeafNode(root);
     // cout << "Max height " << maxDepth(root) << endl;
     // cout
     //     << "Nodes Count " << countNode(root) << endl;
