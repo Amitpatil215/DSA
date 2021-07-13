@@ -199,6 +199,15 @@ int findMinValue(BTNode<int> *root)
     int rightMin = findMinValue(root->right);
     return min(rootData, min(leftMin, rightMin));
 }
+int findMaxValue(BTNode<int> *root)
+{
+    if (root == NULL)
+        return INT_MIN;
+    int rootData = root->data;
+    int leftMin = findMinValue(root->left);
+    int rightMin = findMinValue(root->right);
+    return max(rootData, max(leftMin, rightMin));
+}
 
 int main()
 {
@@ -218,7 +227,8 @@ int main()
     // PreOrderTrraversal(root);
     // PostOrderTrraversal(root);
     // cout << isNodePresent(root, 3);
-    cout << findMinValue(root);
+    // cout << findMinValue(root);
+    cout << findMaxValue(root);
     // cout << "Max height " << maxDepth(root) << endl;
     // cout
     //     << "Nodes Count " << countNode(root) << endl;
