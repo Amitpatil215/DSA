@@ -15,6 +15,19 @@ void DFSPrint(vector<vector<int>> v, int sv, vector<bool> &visited)
     }
 }
 
+void DFS(vector<vector<int>> v)
+{
+    int n = v.size();
+    vector<bool> visited(n, false);
+
+    for (int i = 0; i < n; i++)
+    {
+        if (!visited[i])
+        {
+            DFSPrint(v, i, visited);
+        }
+    }
+}
 void BFSPrint(vector<vector<int>> matrix, int sv)
 {
     int n = matrix.size();
@@ -56,8 +69,8 @@ int main()
         matrix[fv][sv] = 1;
         matrix[sv][fv] = 1;
     }
-    vector<bool> visited(n, 0);
-    //DFSPrint(matrix, 0, visited);
-    BFSPrint(matrix, 0);
+
+    DFS(matrix);
+    // BFSPrint(matrix, 0);
     return 0;
 }
