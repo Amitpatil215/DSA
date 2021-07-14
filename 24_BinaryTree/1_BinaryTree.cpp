@@ -222,7 +222,7 @@ int countLeafNode(BTNode<int> *root)
     return countLeafNode(root->left) + countLeafNode(root->right);
 }
 
-int main()
+/* int main()
 {
     // BTNode<int> *root = new BTNode<int>(1);
     // BTNode<int> *n1 = new BTNode<int>(2);
@@ -249,3 +249,4 @@ int main()
     delete root;
     return 0;
 }
+ */
