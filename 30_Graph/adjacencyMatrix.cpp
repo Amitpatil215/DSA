@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void print(vector<vector<int>> v, int sv, vector<bool> &visited)
+void DFSPrint(vector<vector<int>> v, int sv, vector<bool> &visited)
 {
     cout << sv << endl;
     visited[sv] = true;
@@ -10,7 +10,7 @@ void print(vector<vector<int>> v, int sv, vector<bool> &visited)
     {
         if (v[sv][i] == 1 && visited[i] == false)
         {
-            print(v, i, visited);
+            DFSPrint(v, i, visited);
         }
     }
 }
@@ -31,6 +31,6 @@ int main()
         matrix[sv][fv] = 1;
     }
     vector<bool> visited(n, 0);
-    print(matrix, 0, visited);
+    DFSPrint(matrix, 0, visited);
     return 0;
 }
