@@ -28,12 +28,13 @@ void DFS(vector<vector<int>> v)
         }
     }
 }
-void BFSPrint(vector<vector<int>> matrix, int sv)
+
+void BFSPrint(vector<vector<int>> matrix, int sv, vector<bool> &visited)
 {
     int n = matrix.size();
 
     queue<int> q;
-    vector<bool> visited(n, 0);
+
     q.push(sv);
     visited[sv] = true;
 
@@ -50,6 +51,19 @@ void BFSPrint(vector<vector<int>> matrix, int sv)
                 q.push(i);
                 visited[i] = true;
             }
+        }
+    }
+}
+void BFS(vector<vector<int>> v)
+{
+    int n = v.size();
+    vector<bool> visited(n, false);
+
+    for (int i = 0; i < n; i++)
+    {
+        if (!visited[i])
+        {
+            BFSPrint(v, i, visited);
         }
     }
 }
@@ -70,7 +84,7 @@ int main()
         matrix[sv][fv] = 1;
     }
 
-    DFS(matrix);
-    // BFSPrint(matrix, 0);
+    // DFS(matrix);
+    BFS(matrix);
     return 0;
 }
