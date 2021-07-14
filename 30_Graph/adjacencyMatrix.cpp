@@ -15,6 +15,32 @@ void DFSPrint(vector<vector<int>> v, int sv, vector<bool> &visited)
     }
 }
 
+void BFSPrint(vector<vector<int>> matrix, int sv)
+{
+    int n = matrix.size();
+
+    queue<int> q;
+    vector<bool> visited(n, 0);
+    q.push(sv);
+    visited[sv] = true;
+
+    while (!q.empty())
+    {
+        int currentVertex = q.front();
+        q.pop();
+        cout << currentVertex << endl;
+
+        for (int i = 0; i < n; i++)
+        {
+            if (matrix[currentVertex][i] == 1 && visited[i] == false)
+            {
+                q.push(i);
+                visited[i] = true;
+            }
+        }
+    }
+}
+
 int main()
 {
     int n, e;
@@ -31,6 +57,7 @@ int main()
         matrix[sv][fv] = 1;
     }
     vector<bool> visited(n, 0);
-    DFSPrint(matrix, 0, visited);
+    //DFSPrint(matrix, 0, visited);
+    BFSPrint(matrix, 0);
     return 0;
 }
