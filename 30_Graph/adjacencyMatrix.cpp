@@ -67,7 +67,7 @@ void BFS(vector<vector<int>> v)
         }
     }
 }
-
+/*
 int main()
 {
     int n, e;
@@ -85,6 +85,7 @@ int main()
     }
 
     // DFS(matrix);
-    BFS(matrix);
+    // BFS(matrix);
     return 0;
 }
+ */
