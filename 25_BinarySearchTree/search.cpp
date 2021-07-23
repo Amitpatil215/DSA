@@ -34,6 +34,26 @@ TreeNode *searchInBSTRecursively(TreeNode *root, int val)
     }
 }
 
+TreeNode *searchInBSTIteratively(TreeNode *root, int val)
+{
+    while (root != NULL)
+    {
+        if (root->val == val)
+        {
+            return root;
+        }
+        else if (val < root->val)
+        {
+            root = root->left;
+        }
+        else
+        {
+            root = root->right;
+        }
+    }
+    return NULL;
+}
+
 int main()
 {
     return 0;
