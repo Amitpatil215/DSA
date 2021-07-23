@@ -54,6 +54,32 @@ TreeNode *searchInBSTIteratively(TreeNode *root, int val)
     return NULL;
 }
 
+int findMinRecursively(TreeNode *root)
+{
+    if (root == NULL)
+        return -1;
+    if (root->left != NULL)
+    {
+        return findMinRecursively(root->left);
+    }
+    else
+    {
+        return root->val;
+    }
+}
+
+int findMinItteratively(TreeNode *root)
+{
+    if (root == NULL)
+        return -1;
+
+    while (root->left != NULL)
+    {
+        root = root->left;
+    }
+    return root->val;
+}
+
 int main()
 {
     return 0;
