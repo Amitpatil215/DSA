@@ -75,6 +75,63 @@ class BST
         return node;
     }
 
+    BTNode<int> *_deleteData(BTNode<int> *node, int data)
+    {
+        if (node == NULL)
+            return NULL;
+        if (data > node->data)
+        {
+            node->right = _deleteData(node->right, data);
+        }
+        else if (data < node->data)
+        {
+            node->left = _deleteData(node->left, data);
+        }
+        else // node->data==data
+        {
+            // when node to be delted is leaf node
+            if (node->left == NULL && node->right == NULL)
+            {
+                delete node;
+                return NULL;
+            }
+            else if (node->right == NULL) // If only left sub tree exist
+            {
+                // isolating existing tree
+                BTNode<int> *leftTree = node->left;
+                node->left = NULL;
+                delete node;
+                return leftTree;
+            }
+            else if (node->left == NULL) // If only right sub tree exist
+            {
+                // isolating existing tree
+                BTNode<int> *rightTree = node->right;
+                node->right = NULL;
+                delete node;
+                return rightTree;
+            }
+            else // if both left and right sub tree exists
+            {
+                BTNode<int> *minRightNode = node->right;
+                while (minRightNode->left != NULL)
+                {
+                    minRightNode = minRightNode->left;
+                }
+
+                int rightMin = minRightNode->data;
+
+                // replace node data with right min
+                node->data = rightMin;
+
+                //delete
+                node->right = _deleteData(node->right, rightMin);
+
+                return node;
+            }
+        }
+    }
+
 public:
     BST()
     {
@@ -86,7 +143,10 @@ public:
         delete root;
     };
 
-    void deleteData(int data){};
+    void deleteData(int data)
+    {
+        root = _deleteData(root, data);
+    };
     void insert(int data)
     {
         root = _insert(root, data);
@@ -121,5 +181,21 @@ int main()
 
     cout << b.hasData(3) << endl;  //1
     cout << b.hasData(12) << endl; //0
+    b.deleteData(10);
+    b.print();
+
+    /*
+    10 : L-5 R-20
+    5 : L-3 R-7
+    3 :
+    7 :
+    20 : L-15
+    15 :
+
+    15 : L-5 R-20
+    5 : L-3 R-7
+    3 :
+    7 :
+    20 :  */
     return 0;
 }
