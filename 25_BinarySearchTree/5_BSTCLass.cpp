@@ -130,7 +130,67 @@ class BST
                 return node;
             }
         }
-    }
+    };
+
+    pair<BTNode<int> *, BTNode<int> *> _toLinkedList(BTNode<int> *root)
+    {
+        if (root == NULL)
+        {
+            pair<BTNode<int> *, BTNode<int> *> p;
+            p.first = NULL;
+            p.second = NULL;
+            return p;
+        }
+        // if both left and right sub trees does not exist
+        if (root->left == NULL && root->right == NULL)
+        {
+            pair<BTNode<int> *, BTNode<int> *> p;
+            p.first = root;
+            p.second = root;
+            return p;
+        }
+        // If only left sub tree exist
+        else if (root->left != NULL && root->right == NULL)
+        {
+            pair<BTNode<int> *, BTNode<int> *> leftLL =
+                _toLinkedList(root->left);
+            // connecting left LL with root
+            leftLL.second->right = root;
+
+            pair<BTNode<int> *, BTNode<int> *> p;
+            p.first = leftLL.first;
+            p.second = leftLL.second;
+            return p;
+        }
+        // If only right sub tree exists
+        else if (root->left == NULL && root->right != NULL)
+        {
+            pair<BTNode<int> *, BTNode<int> *> rightLL =
+                _toLinkedList(root->right);
+            // connecting root with  right LL
+            root->right = rightLL.first;
+
+            pair<BTNode<int> *, BTNode<int> *> p;
+            p.first = root;
+            p.second = rightLL.second;
+            return p;
+        }
+        else // when both left and right sub tree exists
+        {
+            pair<BTNode<int> *, BTNode<int> *> leftLL =
+                _toLinkedList(root->left);
+            pair<BTNode<int> *, BTNode<int> *> rightLL =
+                _toLinkedList(root->right);
+            // connecting Left LL -> root -> right LL
+            leftLL.second->right = root;
+            root->right = rightLL.first;
+
+            pair<BTNode<int> *, BTNode<int> *> p;
+            p.first = leftLL.first;
+            p.second = rightLL.second;
+            return p;
+        }
+    };
 
 public:
     BST()
@@ -155,6 +215,18 @@ public:
     {
         return _hasData(root, data);
     };
+    BTNode<int> *toLinkedList()
+    {
+        pair<BTNode<int> *, BTNode<int> *> p = _toLinkedList(root);
+        // All left pointerns must be NULL
+        BTNode<int> *temp = p.first;
+        while (temp != NULL)
+        {
+            temp->left = NULL;
+            temp = temp->right;
+        }
+        return p.first;
+    }
     void print()
     {
         printTreeRecursive(root);
@@ -197,5 +269,12 @@ int main()
     3 :
     7 :
     20 :  */
+
+    BTNode<int> *head = b.toLinkedList();
+    while (head != NULL)
+    {
+        cout << head->data << " -> ";
+        head = head->right;
+    }
     return 0;
 }
