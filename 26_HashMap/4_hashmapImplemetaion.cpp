@@ -75,6 +75,20 @@ public:
 
     V getValue(string key)
     {
+        int bucketIndex = getBucketIndex(key);
+        MapNode<V> *head = buckets[bucketIndex];
+        // checking if key is present in the linked list
+        // if present then simply return the value
+        while (head != NULL)
+        {
+
+            if (head->key == key)
+            {
+                return head->value;
+            }
+            head = head->next;
+        }
+        return 0;
     }
     void insert(string key, V value)
     {
@@ -84,12 +98,13 @@ public:
         // if present then simply update the value
         while (head != NULL)
         {
-            head = head->next;
+
             if (head->key == key)
             {
                 head->value = value;
                 return;
             }
+            head = head->next;
         }
         // if key is not present then create one and insert at front of Linked list
         MapNode<V> *node = new MapNode<V>(key, value);
@@ -119,7 +134,7 @@ public:
                     prev->next = head->next;
                 }
                 V value = head->value; // saving value so that we can return
-                head->next = NULL; // isolation step
+                head->next = NULL;     // isolation step
                 delete head;
                 count--;
                 return value;
