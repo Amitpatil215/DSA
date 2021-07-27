@@ -47,6 +47,36 @@ private:
         return hashcode % numBuckets; // compression function
     }
 
+    void reHash()
+    {
+        MapNode<V> **temp = buckets;
+        buckets = new MapNode<V> *[2 * numBuckets];
+        for (int i = 0; i < 2 * numBuckets; i++)
+        {
+            buckets[i] = NULL;
+        }
+        int oldBucketSize = numBuckets;
+        numBuckets *= 2;
+        count = 0;
+        for (int i = 0; i < oldBucketSize; i++)
+        {
+            MapNode<V> *head = temp[i];
+            while (head != null)
+            {
+                string key = head->key;
+                V value = head->value;
+                insert(key, value);
+                head = head->next;
+            }
+        }
+        // Deleting old buckets and currsponding linkedlist
+        for (int i = 0; i < oldBucketSize; i++)
+        {
+            delete temp[i];
+        }
+        delete[] temp;
+    }
+
 public:
     myMap()
     {
@@ -111,6 +141,12 @@ public:
         node->next = head;
         head = node;
         count++;
+        ///? Rehashing
+
+        double loadFactor = 1.0 * count / numBuckets;
+        if (loadFactor > 0.7)
+        {
+        }
     }
 
     V remove(string key)
