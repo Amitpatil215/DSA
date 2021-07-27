@@ -1,16 +1,16 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-template <typename T>
+template <typename V>
 class MapNode
 {
 
 public:
     string key;
-    T value;
+    V value;
     MapNode *next;
 
-    MapNode(string key, T value)
+    MapNode(string key, V value)
     {
         this->key = key;
         this->value = value;
@@ -23,7 +23,7 @@ public:
 };
 
 template <typename V>
-class myMap
+class mymap
 {
 private:
     MapNode<V> **buckets;
@@ -33,21 +33,19 @@ private:
     int getBucketIndex(string key)
     {
         int hashcode = 0;
-        int primeNo = 37;
-        for (int i = key.size() - 1, i >= 0; i--)
+        int base = 1;
+        int p = 37;
+        for (int i = key.size() - 1; i >= 0; i--)
         {
             hashcode += key[i] * base;
             base = base * p;
-
-            // a base incresing exponentially and ultimately we want to compress it, by using
-            // (n1,n2,n3) % k = [(n1%k)*(n2%k)*(n3%k)] % K
             hashcode = hashcode % numBuckets;
             base = base % numBuckets;
         }
-        return hashcode % numBuckets; // compression function
+        return hashcode % numBuckets;
     }
 
-    void reHash()
+    void rehash()
     {
         MapNode<V> **temp = buckets;
         buckets = new MapNode<V> *[2 * numBuckets];
@@ -58,10 +56,11 @@ private:
         int oldBucketSize = numBuckets;
         numBuckets *= 2;
         count = 0;
+
         for (int i = 0; i < oldBucketSize; i++)
         {
             MapNode<V> *head = temp[i];
-            while (head != null)
+            while (head != NULL)
             {
                 string key = head->key;
                 V value = head->value;
@@ -69,7 +68,7 @@ private:
                 head = head->next;
             }
         }
-        // Deleting old buckets and currsponding linkedlist
+
         for (int i = 0; i < oldBucketSize; i++)
         {
             delete temp[i];
@@ -78,7 +77,7 @@ private:
     }
 
 public:
-    myMap()
+    mymap()
     {
         count = 0;
         numBuckets = 5;
@@ -88,14 +87,13 @@ public:
             buckets[i] = NULL;
         }
     }
-
-    ~myMap()
+    ~mymap()
     {
         for (int i = 0; i < numBuckets; i++)
         {
-            delete buckets[i]; // deltetinglinked list recursively
+            delete buckets[i];
         }
-        delete[] buckets; // delete array
+        delete[] buckets;
     }
 
     int size()
@@ -107,11 +105,8 @@ public:
     {
         int bucketIndex = getBucketIndex(key);
         MapNode<V> *head = buckets[bucketIndex];
-        // checking if key is present in the linked list
-        // if present then simply return the value
         while (head != NULL)
         {
-
             if (head->key == key)
             {
                 return head->value;
@@ -120,15 +115,13 @@ public:
         }
         return 0;
     }
+
     void insert(string key, V value)
     {
         int bucketIndex = getBucketIndex(key);
         MapNode<V> *head = buckets[bucketIndex];
-        // checking if key is alredy present in the linked list
-        // if present then simply update the value
         while (head != NULL)
         {
-
             if (head->key == key)
             {
                 head->value = value;
@@ -136,16 +129,14 @@ public:
             }
             head = head->next;
         }
-        // if key is not present then create one and insert at front of Linked list
         MapNode<V> *node = new MapNode<V>(key, value);
-        node->next = head;
-        head = node;
+        node->next = buckets[bucketIndex];
+        buckets[bucketIndex] = node;
         count++;
-        ///? Rehashing
-
-        double loadFactor = 1.0 * count / numBuckets;
+        double loadFactor = (1.0 * count) / numBuckets;
         if (loadFactor > 0.7)
         {
+            rehash();
         }
     }
 
@@ -153,15 +144,12 @@ public:
     {
         int bucketIndex = getBucketIndex(key);
         MapNode<V> *head = buckets[bucketIndex];
-        // checking if key is alredy present in the linked list
-        // if present then delete
         MapNode<V> *prev = NULL;
-        while (head->!= NULL)
+        while (head != NULL)
         {
-
             if (head->key == key)
             {
-                if (prev == NULL) //if key is present at head
+                if (prev == NULL)
                 {
                     buckets[bucketIndex] = head->next;
                 }
@@ -169,19 +157,48 @@ public:
                 {
                     prev->next = head->next;
                 }
-                V value = head->value; // saving value so that we can return
-                head->next = NULL;     // isolation step
+                V value = head->value;
+                head->next = NULL;
                 delete head;
                 count--;
                 return value;
             }
+
             prev = head;
             head = head->next;
         }
         return 0;
     }
+    double getLoadFactor()
+    {
+        return (1.0 * count) / numBuckets;
+    }
 };
 int main()
 {
+
+    mymap<int> ourmap;
+    for (int i = 0; i < 10; i++)
+    {
+        char c = '0' + i;
+        string key = "abc";
+        key = key + c;
+        int value = i + 1;
+        ourmap.insert(key, value);
+        cout << ourmap.getLoadFactor() << endl;
+    }
+    cout << ourmap.size() << endl;
+
+    ourmap.remove("abc1");
+    ourmap.remove("abc6");
+
+    for (int i = 0; i < 10; i++)
+    {
+        char c = '0' + i;
+        string key = "abc";
+        key = key + c;
+        cout << key << " " << ourmap.getValue(key) << endl;
+    }
+    cout << ourmap.size() << endl;
     return 0;
 }
