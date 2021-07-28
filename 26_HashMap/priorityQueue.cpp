@@ -26,6 +26,26 @@ public:
         }
         return 0;
     }
+    void insert(int element)
+    {
+        pq.push_back(element);
+
+        // Check for min heap properties
+        int childIndex = pq.size() - 1;
+        while (childIndex > 0)
+        {
+            int parentIndex = (childIndex - 1) / 2;
+            if (pq[childIndex] < pq[parentIndex])
+            {
+                swap(pq[childIndex], pq[parentIndex]);
+                childIndex = parentIndex;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
 };
 int main()
 {
