@@ -46,10 +46,25 @@ void kSmallestElementsMethod2(int *a, int n, int k)
         pq.pop();
     }
 }
+void kSmallestElementsMethod3(int *a, int n, int k)
+{
+    priority_queue<int, vector<int>, greater<int>> pq;
+
+    for (int i = 0; i < n; i++)
+    {
+        pq.push(a[i]);
+    }
+    //print
+    for (int i = 0; i < k; i++)
+    {
+        cout << pq.top() << endl;
+        pq.pop();
+    }
+}
 int main()
 {
     int arr[] = {5, 6, 9, 12, 3, 13, 2};
-    kSmallestElementsMethod2(arr, 7, 3);
+    kSmallestElementsMethod3(arr, 7, 3);
     /* 5
        3
        2 */
