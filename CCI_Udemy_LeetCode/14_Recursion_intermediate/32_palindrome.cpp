@@ -10,7 +10,7 @@ bool isPalindrome(string str, int s, int e)
 
     if (str[s] == str[e])
     {
-        return true && isPalindrome(str, s + 1, e - 1);
+        return isPalindrome(str, s + 1, e - 1);
     }
 
     return false;
