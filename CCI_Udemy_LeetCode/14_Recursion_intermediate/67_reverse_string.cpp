@@ -19,7 +19,7 @@ public:
         int end = 0; // it traverses throw the whole sentence
         while (end < n)
         {
-            if (s[end] == '')
+            if (s[end] == ' ')
             {
                 reverse(s, begin, end - 1);
                 end++;
@@ -53,10 +53,16 @@ public:
             {
                 ans.push_back(' ');
                 i++;
+
+                // if more than one space present move ahead
+                while (s[i] == ' ')
+                {
+                    i++;
+                }
             }
-            // if more than one space present move ahead
-            while (s[i] == ' ')
+            else
             {
+                ans.push_back(s[i]);
                 i++;
             }
         }
