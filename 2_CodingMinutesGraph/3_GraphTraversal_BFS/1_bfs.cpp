@@ -38,43 +38,45 @@ public:
             cout << endl;
         }
     }
-    void bfs(int src)
+
+    // Member functions declaration
+    void bfs(int src);
+};
+void Graph::bfs(int src)
+{
+    queue<int> q;
+    bool *visited = new bool[V]{false};
+
+    q.push(src);
+    visited[src] = true;
+
+    while (!q.empty())
     {
-        queue<int> q;
-        bool *visited = new bool[V]{false};
-
-        q.push(src);
-        visited[src] = true;
-
-        while (!q.empty())
+        int currNode = q.front();
+        cout << currNode << endl;
+        q.pop();
+        // push all the nebhours of current node
+        for (auto node : l[currNode])
         {
-            int currNode = q.front();
-            cout << currNode << endl;
-            q.pop();
-            // push all the nebhours of current node
-            for (auto node : l[currNode])
+            if (!visited[node])
             {
-                if (!visited[node])
-                {
-                    q.push(node);
-                    visited[node] = true;
-                }
+                q.push(node);
+                visited[node] = true;
             }
         }
     }
-};
-
+}
 int main()
 {
     Graph g(7);
-	g.addEdge(0,1);
-	g.addEdge(1,2);
-	g.addEdge(2,3);
-	g.addEdge(3,5);
-	g.addEdge(5,6);
-	g.addEdge(4,5);
-	g.addEdge(0,4);
-	g.addEdge(3,4);
-	g.bfs(1);
+    g.addEdge(0, 1);
+    g.addEdge(1, 2);
+    g.addEdge(2, 3);
+    g.addEdge(3, 5);
+    g.addEdge(5, 6);
+    g.addEdge(4, 5);
+    g.addEdge(0, 4);
+    g.addEdge(3, 4);
+    g.bfs(1);
     return 0;
 }
