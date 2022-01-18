@@ -23,40 +23,51 @@ public:
             l[dst].push_back(src);
         }
     }
+
     bool dfs(
-        int node, int parent, vector<bool> &visitedArray)
+        int node, vector<bool> &visitedArray, vector<bool> &currCallStack)
     {
+        // visit the node and add to current call satck
         visitedArray[node] = true;
+        currCallStack[node] = true;
 
-        bool isContainCycle = false;
-
+        // perform DFS on nbrs
+        // if they are visited alredy then check in current call stack if present-> we found cycle otherwise no cycle
         for (auto nbr : l[node])
         {
             if (!visitedArray[nbr])
             {
-                bool isNbrFoundCycle = dfs(nbr, node, visitedArray);
-                if (isNbrFoundCycle)
+                bool isContainCycle = dfs(nbr, visitedArray, currCallStack);
+                // if any of the nbr found cycle
+                if (isContainCycle)
                     return true;
             }
-            // this neighbour is alredy visited but it is not a parent of current node
-            // that means it makes a cycle
-            else if (nbr != parent)
+            else
             {
-                return true;
+                if (currCallStack[nbr])
+                {
+                    // we found a cycle
+                    return true;
+                }
             }
         }
+        // finally if there is no cycle found and we returning back from a node
+        // pop out it from call stack
+        currCallStack[node] = false;
         return false;
     }
 
     bool contains_cycle()
     {
-        // logic
-        // Keep track of visited nodes
-        // cycle present if we can visit a node more than once
-        // and that node is not the parent of the current node
-
+        //logic
+        // We have a cycle only if
+        // 1. It is erlier visited
+        // 2. and present in the current dfs call stack
+        // (basically means a nbr is also a parent of the current node)
+        // thats why we maintaining a currcallstack array to check
         vector<bool> visitedArray(V, false);
-        bool isContainCycle = dfs(0, 0, visitedArray);
+        vector<bool> currCallStack(V, false);
+        bool isContainCycle = dfs(0, visitedArray, currCallStack);
         return isContainCycle;
     }
 };
