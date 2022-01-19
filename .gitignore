@@ -6,3 +6,5 @@
 *.dll
 *.o
 *.so
+playground/input.txt
+playground/output.txt
