@@ -46,7 +46,7 @@ BTNode<int> *buildTree(vector<int> &postOrder, vector<int> &inorder)
 }
 int main()
 {
-    vector<int> postOrder = {3, 9, 20, 15, 7};
+    vector<int> postOrder = {9,15,7,20,3};
     vector<int> inorder = {9, 3, 15, 20, 7};
     BTNode<int> *root = buildTree(postOrder, inorder);
     InOrderTrraversal(root);

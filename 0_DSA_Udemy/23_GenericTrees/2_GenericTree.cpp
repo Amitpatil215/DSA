@@ -93,6 +93,7 @@ TreeNode<int> *takeInputLevelWise()
             front->children.push_back(childNode);
         }
     }
+    return root;
 }
 void levelOrderPrint(TreeNode<int> *root)
 {
@@ -214,8 +215,9 @@ void deleteTree(TreeNode<int> *root)
 // 1 3 2 3 4 2 5 6 2 7 8 0 0 0 0 1 9 0
 int main()
 {
-    //TreeNode<int> *root = takeInputUsingRecursion();
-    TreeNode<int> *root = takeInputLevelWise();
+    TreeNode<int> *root = takeInputUsingRecursion();
+    // printTree(root);
+    // TreeNode<int> *root = takeInputLevelWise();
     // levelOrderPrint(root);
     // cout << countNodes(root) << endl;
     // cout << height(root) << endl;
@@ -223,7 +225,7 @@ int main()
     //cout << countLeafNodes(root) << endl;
     // preOrderTraversal(root);
     // deleteTree(root);
-    delete root; // call's custom destructor
+    // delete root; // call's custom destructor
     postOrderTraversal(root);
     return 0;
 }
