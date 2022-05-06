@@ -1,7 +1,7 @@
 #include "1_BinaryTree.cpp"
 BTNode<int> *buildTreeHelper(vector<int> inorder, vector<int> preorder, int inOrderStart, int inOrderEnd, int preOrderStart, int preOrderEnd)
 {
-    //base case
+    // base case
     if (inOrderStart > inOrderEnd)
     {
         return NULL;
@@ -23,7 +23,7 @@ BTNode<int> *buildTreeHelper(vector<int> inorder, vector<int> preorder, int inOr
     int leftInOrderStart = inOrderStart;
     int leftInOrderEnd = rootIndex - 1;
     int leftPreOrderStart = preOrderStart + 1;
-    int leftPreOrderEnd = leftPreOrderStart + leftPreOrderEnd - leftInOrderStart;
+    int leftPreOrderEnd = leftPreOrderStart + leftInOrderEnd - leftInOrderStart;
 
     int rightInOrderStart = rootIndex + 1;
     int rightInOrderEnd = inOrderEnd;
