@@ -1,1 +1,1 @@
-au
+cout << endl;
