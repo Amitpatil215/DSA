@@ -81,5 +81,6 @@
         "xtree": "cpp",
         "string": "cpp"
     },
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, ColumnLimit: 80, PointerAlignment: Left, IndentWidth: 4}"
 }
