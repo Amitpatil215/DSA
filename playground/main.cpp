@@ -19,22 +19,7 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args)
 
 void solve()
 {
-    long long int n;
-    cin >> n;
-    long long netSum = 0;
-    for (long long int i = 0; i < n; i++)
-    {
-        long long int a;
-        cin >> a;
-        netSum += a;
-    }
-    if (netSum == 0)
-    {
-        cout << "YES";
-    }
-    else
-        cout << "NO";
-    cout << endl;
+    
 }
 
 int main()
