@@ -1,3 +1,5 @@
+// Ninjas Training
+// venice 7
 /*
 Ninja is planing this ‘N’ days-long training schedule. Each day, he can perform
 any one of these three activities. (Running, Fighting Practice or Learning New
