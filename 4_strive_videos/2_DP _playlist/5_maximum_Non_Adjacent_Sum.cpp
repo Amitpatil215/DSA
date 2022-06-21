@@ -150,7 +150,12 @@ int maximumNonAdjacentSum(vector<int> &nums) {
     int prev2 = 0;
 
     for (int i = 1; i < n; i++) {
-        int picked = nums[i] + prev2;
+        int picked;
+        if (i - 2 >= 0)  // handling edge case if i-2 becomes -ve
+            picked = nums[i] + prev2;
+        else
+            picked = nums[i] + 0;
+
         int notPicked = 0 + prev1;
 
         int curr = max(picked, notPicked);
