@@ -79,11 +79,11 @@ int uniquePaths(int m, int n) {
                 dp[i][j] = 1;
             } else {
                 int up = 0;
-                int down = 0;
+                int left = 0;
                 if (i > 0) up = dp[i - 1][j];
-                if (j > 0) down = dp[i][j - 1];
+                if (j > 0) left = dp[i][j - 1];
 
-                dp[i][j] = up + down;
+                dp[i][j] = up + left;
             }
         }
     }
@@ -101,11 +101,11 @@ int uniquePaths(int m, int n) {
                 currRow[j] = 1;
             } else {
                 int up = 0;
-                int down = 0;
+                int left = 0;
                 if (i > 0) up = prevRow[j];
-                if (j > 0) down = currRow[j - 1];
+                if (j > 0) left = currRow[j - 1];
 
-                currRow[j] = up + down;
+                currRow[j] = up + left;
             }
         }
         prevRow = currRow;
