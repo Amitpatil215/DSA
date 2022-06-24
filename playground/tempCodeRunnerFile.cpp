@@ -1,1 +1,1 @@
-cout << endl;
+p - 2

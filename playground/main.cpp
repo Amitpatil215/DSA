@@ -1,40 +1,49 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
+// A simple Shape interface which provides a method to get the Shape's area
+class Shape {
+   public:
+    virtual float getArea(){};
+};
+// A Rectangle is a Shape with a specific width and height
+class Rectangle : public Shape {  // derived form Shape class
+   private:
+    float width;
+    float height;
 
-#define debug(...) __f(#__VA_ARGS__, __VA_ARGS__)
-
-template <typename Arg1>
-void __f(const char *name, Arg1 &&arg1) {
-    cout << name << " : " << arg1 << endl;
-}
-
-template <typename Arg1, typename... Args>
-void __f(const char *names, Arg1 &&arg1, Args &&...args) {
-    const char *comma = strchr(names + 1, ',');
-    cout.write(names, comma - names) << " : " << arg1 << " | ";
-    __f(comma + 1, args...);
-}
-
-void solve() {
-    vector<char> abc = {'a', 'c', 'm', 'd'};
-
-    sort(abc.begin(), abc.end());
-    for (auto a : abc) {
-        cout << a;
-    };
-}
-
-int main() {
-#ifndef ONLINE_JUDGE
-    freopen("E:/Work/Interview Prep/DSA/playground/input.txt", "r", stdin);
-    freopen("E:/Work/Interview Prep/DSA/playground/output.txt", "w", stdout);
-#endif
-    clock_t z = clock();
-    int test = 1;
-    cin >> test;
-    while (test--) {
-        solve();
+   public:
+    Rectangle(float wid, float heigh) {
+        width = wid;
+        height = heigh;
     }
-    cerr << "Run Time : " << ((double)(clock() - z) / CLOCKS_PER_SEC);
-    return 0;
+    float getArea() { return width * height; }
+};
+// A Circle is a Shape with a specific radius
+class Circle : public Shape {
+   private:
+    float radius;
+
+   public:
+    Circle(float rad) { radius = rad; }
+    float getArea() { return 3.14159f * radius * radius; }
+};
+// A Square is a Shape with a specific length
+class Square : public Shape {
+   private:
+    float length;
+
+   public:
+    Square(float len) { length = len; }
+    float getArea() { return length * length; }
+};
+int main() {
+    Shape* shape[3];
+    Rectangle r(2, 6);  // Creating Rectangle object
+    shape[0] = &r;      // Referencing Shape class to Rectangle object
+
+    Circle c(5);    // Creating Circle object
+    shape[1] = &c;  // Referencing Shape class to Circle object
+    Square s(10);   // Creating Square object
+    shape[2] = &s;  // Referencing Shape class to Circle object
+    for (int i = 0; i < 3; i++) cout << shape[i]->getArea() << endl;
 }
