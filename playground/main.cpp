@@ -1,49 +1,70 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-// A simple Shape interface which provides a method to get the Shape's area
-class Shape {
-   public:
-    virtual float getArea(){};
-};
-// A Rectangle is a Shape with a specific width and height
-class Rectangle : public Shape {  // derived form Shape class
-   private:
-    float width;
-    float height;
 
-   public:
-    Rectangle(float wid, float heigh) {
-        width = wid;
-        height = heigh;
+#define debug(...) __f(#__VA_ARGS__, __VA_ARGS__)
+
+template <typename Arg1>
+void __f(const char *name, Arg1 &&arg1) {
+    cout << name << " : " << arg1 << endl;
+}
+
+template <typename Arg1, typename... Args>
+void __f(const char *names, Arg1 &&arg1, Args &&...args) {
+    const char *comma = strchr(names + 1, ',');
+    cout.write(names, comma - names) << " : " << arg1 << " | ";
+    __f(comma + 1, args...);
+}
+
+void solve() {
+    long long int n;
+    cin >> n;
+    vector<int> arr;
+    while (n > 0) {
+        int x = n % 10;
+        n = n / 10;
+        arr.push_back(x);
     }
-    float getArea() { return width * height; }
-};
-// A Circle is a Shape with a specific radius
-class Circle : public Shape {
-   private:
-    float radius;
+    sort(arr.begin(), arr.end());
+    vector<int> num1;
+    vector<int> num2;
+    int si = 0;
+    int ei = arr.size() - 1;
+    for (int i = 0; i < arr.size(); i++) {
+        if (i % 2 == 0) {
+            num1.push_back(arr[i]);
+        } else
+            num2.push_back(arr[i]);
+    }
+    long long sum1 = 0;
+    long long sum2 = 0;
+    long long factor = 1;
 
-   public:
-    Circle(float rad) { radius = rad; }
-    float getArea() { return 3.14159f * radius * radius; }
-};
-// A Square is a Shape with a specific length
-class Square : public Shape {
-   private:
-    float length;
+    for (int i = num1.size() - 1; i >= 0; i--) {
+        sum1 += num1[i] * factor;
+        factor *= 10;
+    }
+    factor = 1;
+    for (int i = num2.size() - 1; i >= 0; i--) {
+        sum2 += num2[i] * factor;
+        factor *= 10;
+    }
+    // debug(sum1, sum2);
+    long long int sum = 0;
+    sum = sum1 + sum2;
+    cout << sum << endl;
+}
 
-   public:
-    Square(float len) { length = len; }
-    float getArea() { return length * length; }
-};
 int main() {
-    Shape* shape[3];
-    Rectangle r(2, 6);  // Creating Rectangle object
-    shape[0] = &r;      // Referencing Shape class to Rectangle object
-
-    Circle c(5);    // Creating Circle object
-    shape[1] = &c;  // Referencing Shape class to Circle object
-    Square s(10);   // Creating Square object
-    shape[2] = &s;  // Referencing Shape class to Circle object
-    for (int i = 0; i < 3; i++) cout << shape[i]->getArea() << endl;
+#ifndef ONLINE_JUDGE
+    freopen("E:/Work/Interview Prep/DSA/playground/input.txt", "r", stdin);
+    freopen("E:/Work/Interview Prep/DSA/playground/output.txt", "w", stdout);
+#endif
+    clock_t z = clock();
+    int test = 1;
+    cin >> test;
+    while (test--) {
+        solve();
+    }
+    cerr << "Run Time : " << ((double)(clock() - z) / CLOCKS_PER_SEC);
+    return 0;
 }

@@ -9,7 +9,7 @@ Considering the constraints of the maximum weight that a knapsack can carry, you
 have to find and return the maximum value that a thief can generate by stealing
 items.
 
-Sample Input:
+Sample Input: 
 1
 4
 1 2 4 5

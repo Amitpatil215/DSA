@@ -18,7 +18,7 @@ Partition 1: {5, 2, 1}, {5}. The subset difference between subset sum is: (5 + 2
 + 1) - (5) = 3 Partition 2: {5, 2, 1}, {5}. The subset difference between subset
 sum is: (5 + 2 + 1) - (5) = 3 These two partitions are different because, in the
 1st partition, S1 contains 5 from index 0, and in the 2nd partition, S1 contains
-5 from index 2. 
+5 from index 2.
 
 Constraints :
 1 ≤ T ≤ 10
@@ -43,8 +43,8 @@ int cp(int n, int k, vector<int> &arr) {
                 if (arr[0] == 0) {
                     dp[0][0] = 2;
                 } else
-                    // if target sum is 0 but array element is not 0 then, we
-                    // should't take it
+                    // if target sum is 0 but array element is not 0 , that
+                    // means we hace reached to target
                     dp[0][0] = 1;
                 // if element is target itself then we should take it to make
                 // target sum 0
