@@ -38,8 +38,8 @@ Constraints :
 0 <= B <= V - 1
 
 Where 'V' is the number of vertices, 'E' is the number of edges, 'A' and 'B' are
-the vertex numbers. 
-Time Limit: 1 second 
+the vertex numbers.
+Time Limit: 1 second
 
 Sample Input 1: 4 4 0 1 0 3 1 2 2 3
 Sample Output 1:
@@ -60,9 +60,8 @@ void bfs(int startIndex, int vertex, vector<int> &ans, vector<vector<int>> adj,
         q.pop();
 
         // explore nodes neighbours
-        sort(adj[frontNode].begin(),
-             adj[frontNode]
-                 .end());  // [optional] just to match to the test case answer
+        // sorting [optional] just to match to the test case answer
+        sort(adj[frontNode].begin(), adj[frontNode].end());
         for (auto nbr : adj[frontNode]) {
             if (visited[nbr] == 0) {
                 q.push(nbr);
