@@ -16,42 +16,19 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args) {
 }
 
 void solve() {
-    long long int n;
+    int n;
     cin >> n;
-    vector<int> arr;
-    while (n > 0) {
-        int x = n % 10;
-        n = n / 10;
-        arr.push_back(x);
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        int a;
+        cin >> a;
+        sum += a;
     }
-    sort(arr.begin(), arr.end());
-    vector<int> num1;
-    vector<int> num2;
-    int si = 0;
-    int ei = arr.size() - 1;
-    for (int i = 0; i < arr.size(); i++) {
-        if (i % 2 == 0) {
-            num1.push_back(arr[i]);
-        } else
-            num2.push_back(arr[i]);
+    if (sum % 2 == 0) {
+        cout << "YES" << endl;
+    } else {
+        cout << "NO" << endl;
     }
-    long long sum1 = 0;
-    long long sum2 = 0;
-    long long factor = 1;
-
-    for (int i = num1.size() - 1; i >= 0; i--) {
-        sum1 += num1[i] * factor;
-        factor *= 10;
-    }
-    factor = 1;
-    for (int i = num2.size() - 1; i >= 0; i--) {
-        sum2 += num2[i] * factor;
-        factor *= 10;
-    }
-    // debug(sum1, sum2);
-    long long int sum = 0;
-    sum = sum1 + sum2;
-    cout << sum << endl;
 }
 
 int main() {
