@@ -18,16 +18,17 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args) {
 void solve() {
     int n;
     cin >> n;
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-        int a;
-        cin >> a;
-        sum += a;
-    }
-    if (sum % 2 == 0) {
-        cout << "YES" << endl;
-    } else {
-        cout << "NO" << endl;
+    map<int, int> m;
+    map<int, int> notTheif;
+    for (int i = 1; i <= n; i++) {
+        int l, r;
+        cin >> l >> r;
+        // not a theif
+        if (i >= l && i <= r) {
+            notTheif[i] = 0;
+        } else {
+            
+        }
     }
 }
 
