@@ -15,21 +15,30 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args) {
     __f(comma + 1, args...);
 }
 
+#define mod 1000000007;
+int arr[100005];
+
+long long fastmod(int base, int pow) {
+    if (pow == 0)
+        return 1;
+    else if (pow & 1) {
+        return (base * fastmod(base, pow - 1)) % mod;
+    } else {
+        long long k = fastmod(base, pow / 2);
+        return (k * k) % mod;
+    }
+}
+
+int find_total_ways(int n) {
+    if (n == 1)
+        cout << 0 << "\n";
+    else
+        cout << fastmod(2, n) - 2 << "\n";
+}
 void solve() {
     int n;
     cin >> n;
-    map<int, int> m;
-    map<int, int> notTheif;
-    for (int i = 1; i <= n; i++) {
-        int l, r;
-        cin >> l >> r;
-        // not a theif
-        if (i >= l && i <= r) {
-            notTheif[i] = 0;
-        } else {
-            
-        }
-    }
+    find_total_ways(n);
 }
 
 int main() {
