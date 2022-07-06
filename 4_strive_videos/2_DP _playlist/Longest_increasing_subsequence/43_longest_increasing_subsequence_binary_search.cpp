@@ -1,3 +1,4 @@
+
 // Binary Search solution
 class Solution {
    public:

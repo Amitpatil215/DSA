@@ -14,31 +14,30 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args) {
     cout.write(names, comma - names) << " : " << arg1 << " | ";
     __f(comma + 1, args...);
 }
+const int m = 1e9 + 7;
 
-#define mod 1000000007;
-int arr[100005];
-
-long long fastmod(int base, int pow) {
-    if (pow == 0)
-        return 1;
-    else if (pow & 1) {
-        return (base * fastmod(base, pow - 1)) % mod;
-    } else {
-        long long k = fastmod(base, pow / 2);
-        return (k * k) % mod;
+int numPermsDISequence(string S) {
+    int n = S.size();
+    vector<vector<int>> dp(n + 1, vector<int>(n + 1));
+    for (int j = 0; j <= n; j++) dp[0][j] = 1;
+    for (int i = 0; i < n; i++) {
+        if (S[i] == '+') {
+            for (int j = 0, curr = 0; j < n - i; j++) {
+                curr = (dp[i][j] + curr) % m;
+                dp[i + 1][j] = (dp[i + 1][j] + curr) % m;
+            }
+        } else {
+            for (int j = n - i - 1, curr = 0; j >= 0; j--) {
+                curr = (dp[i][j + 1] + curr) % m;
+                dp[i + 1][j] = (dp[i + 1][j] + curr) % m;
+            }
+        }
     }
-}
-
-int find_total_ways(int n) {
-    if (n == 1)
-        cout << 0 << "\n";
-    else
-        cout << fastmod(2, n) - 2 << "\n";
+    return dp[n][0];
 }
 void solve() {
-    int n;
-    cin >> n;
-    find_total_ways(n);
+    cout<<numPermsDISequence("-+-")<<endl;
+    cout<<numPermsDISequence("-")<<endl;
 }
 
 int main() {

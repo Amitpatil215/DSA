@@ -13,7 +13,7 @@ For Example : Let ‘ARR’ = [50, 3, 90, 60, 80]. In this
 array the longest increasing subsequences are [50, 60, 80] and [3, 60, 80].
 There are other increasing subsequences as well but we need the number of
 longest ones. Hence the answer is 2.
-
+s
 Constraints :
 1 ≤ T ≤ 10
 1 ≤ N ≤ 2000
