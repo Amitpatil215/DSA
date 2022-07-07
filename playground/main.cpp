@@ -14,30 +14,57 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args) {
     cout.write(names, comma - names) << " : " << arg1 << " | ";
     __f(comma + 1, args...);
 }
-const int m = 1e9 + 7;
+#include <bits/stdc++.h>
+using namespace std;
 
-int numPermsDISequence(string S) {
-    int n = S.size();
-    vector<vector<int>> dp(n + 1, vector<int>(n + 1));
-    for (int j = 0; j <= n; j++) dp[0][j] = 1;
-    for (int i = 0; i < n; i++) {
-        if (S[i] == '+') {
-            for (int j = 0, curr = 0; j < n - i; j++) {
-                curr = (dp[i][j] + curr) % m;
-                dp[i + 1][j] = (dp[i + 1][j] + curr) % m;
-            }
+bool detectCycleDFS(int startNode, int parentNode, vector<int> &visited,
+                    vector<vector<int>> &adjList) {
+    visited[startNode] = true;
+    for (auto nbr : adjList[startNode]) {
+        if (!visited[nbr]) {
+            bool isCycleDetected =
+                detectCycleDFS(nbr, startNode, visited, adjList);
+            if (isCycleDetected) {
+                debug("if true");
+                return true;
+            };
         } else {
-            for (int j = n - i - 1, curr = 0; j >= 0; j--) {
-                curr = (dp[i][j + 1] + curr) % m;
-                dp[i + 1][j] = (dp[i + 1][j] + curr) % m;
+            // if node is already visited and its not visited by its parent
+            // then we have a cycle
+            if (parentNode != -1 && nbr != parentNode) {
+                debug("else true");
+                return true;
+            };
+        }
+    }
+    return false;
+}
+
+void solve() {
+    int vertices, edges;
+    cin >> vertices >> edges;
+
+    vector<vector<int>> adjList(vertices, vector<int>());
+
+    for (int i = 0; i < vertices; i++) {
+        int u, v;
+        cin >> u >> v;
+        adjList[u].push_back(v);
+        adjList[v].push_back(u);
+    }
+    // check dfs cycle for every component
+    vector<int> visited(vertices, false);
+    for (int i = 0; i < vertices; i++) {
+        if (!visited[i]) {
+            if (detectCycleDFS(i, -1, visited, adjList)) {
+                cout << "True" << endl;
+                return;
             }
         }
     }
-    return dp[n][0];
-}
-void solve() {
-    cout<<numPermsDISequence("-+-")<<endl;
-    cout<<numPermsDISequence("-")<<endl;
+    cout << "False" << endl;
+
+    return;
 }
 
 int main() {

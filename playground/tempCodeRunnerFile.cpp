@@ -1,1 +1,1 @@
-mod
+   debug(attacker, defenser);
