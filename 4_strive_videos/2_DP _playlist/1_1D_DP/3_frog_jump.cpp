@@ -90,7 +90,7 @@ int frogJump(int n, vector<int> &heights)
 
 ///? Space Optimized Tabulation
 
-/* #include<bits/stdc++.h>
+#include<bits/stdc++.h>
 int frogJump(int n, vector<int> &heights)
 {
     int prev1i=0;
@@ -106,4 +106,4 @@ int frogJump(int n, vector<int> &heights)
         prev1i=curr;
     }
     return prev1i;
-} */
+}

@@ -63,7 +63,7 @@ sum of sequence in which no elements are adjacent in the given array/list.
 
 ///? Recursion
 
-/* int mnas(int index, vector<int> &nums) {
+int mnas(int index, vector<int> &nums) {
   if (index == 0) {
     /// That means we have not chosen index 1
     /// simply consider the value of this
@@ -84,11 +84,11 @@ sum of sequence in which no elements are adjacent in the given array/list.
 }
 int maximumNonAdjacentSum(vector<int> &nums) {
   return mnas(nums.size() - 1, nums);
-} */
+}
 
 ///? Recursion + Memoization
 
-/* int mnas(int index, vector<int> &nums, vector<int> &dp) {
+int mnas(int index, vector<int> &nums, vector<int> &dp) {
   if (index == 0) {
     /// That means we have not chosen index 1
     /// simply consider the value of this
@@ -103,7 +103,8 @@ int maximumNonAdjacentSum(vector<int> &nums) {
   }
   /// pick case
   /// if we picked the element we can not pick adjancent so index-2 instead of
-index-1 int picked = nums[index] + mnas(index - 2, nums, dp);
+  /// index-1 
+  int picked = nums[index] + mnas(index - 2, nums, dp);
 
   /// if current elment not picked we can pick an elment just before it
   int notPicked = 0 + mnas(index - 1, nums, dp);
@@ -115,11 +116,11 @@ index-1 int picked = nums[index] + mnas(index - 2, nums, dp);
 int maximumNonAdjacentSum(vector<int> &nums) {
   vector<int> dp(nums.size() + 1, -1);
   return mnas(nums.size() - 1, nums, dp);
-} */
+}
 
 //? Tabulation T=O(n) s=O(n)
 
-/* #include <bits/stdc++.h>
+#include <bits/stdc++.h>
 int maximumNonAdjacentSum(vector<int>& nums) {
     int n = nums.size();
     vector<int> dp(n + 1, 0);
@@ -138,11 +139,11 @@ int maximumNonAdjacentSum(vector<int>& nums) {
         dp[i] = max(picked, notPicked);
     }
     return dp[n - 1];
-} */
+}
 
 //? Tabulation + Space Optimization
 
-/* #include <bits/stdc++.h>
+#include <bits/stdc++.h>
 int maximumNonAdjacentSum(vector<int> &nums) {
     int n = nums.size();
 
@@ -163,4 +164,4 @@ int maximumNonAdjacentSum(vector<int> &nums) {
         prev1 = curr;
     }
     return prev1;
-} */
+}
