@@ -1,5 +1,5 @@
 /*
-Bridge 
+Bridge
 
 venice 75
 
@@ -35,14 +35,14 @@ node can be reached starting from all other nodes.
 class Solution {
    public:
     /*
-            // Definition for a Graph
+            /// Definition for a Graph
             class Graph
             {
             public:
-                    // vector of vectors to represent an adjacency list
+                    /// vector of vectors to represent an adjacency list
                     vector<vector<int>> adjList;
 
-                    // Total number of nodes in the graph
+                    /// Total number of nodes in the graph
                     int n;
             }
     */
@@ -52,19 +52,28 @@ class Solution {
              set<pair<int, int>> &ans, vector<vector<int>> adjList) {
         visited[startNode] = true;
         timer++;
+        // intially mark starttime and low time both to the timer
         startTime[startNode] = lowTime[startNode] = timer;
 
         for (auto nbr : adjList[startNode]) {
             if (!visited[nbr]) {
                 dfs(nbr, startNode, timer, visited, startTime, lowTime, ans,
                     adjList);
+                // take minimum low time from the adjacent nodes
+                // and assign it to current startNode
                 lowTime[startNode] = min(lowTime[startNode], lowTime[nbr]);
+
+                // if in case we find that our startNode start time is less
+                // than low time of its neighbour then we got a bridge
                 if (startTime[startNode] < lowTime[nbr]) {
                     ans.insert({startNode, nbr});
                 }
             } else {
-                if (nbr == parent) continue;
-                lowTime[startNode] = min(lowTime[startNode], startTime[nbr]);
+                // we shouldn't consider parent
+                if (nbr != parent) {
+                    lowTime[startNode] =
+                        min(lowTime[startNode], startTime[nbr]);
+                }
             }
         }
     }
