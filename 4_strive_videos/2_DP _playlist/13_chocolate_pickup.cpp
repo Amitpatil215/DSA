@@ -14,8 +14,12 @@ the same cell, only one of them will pick the chocolates in it. If Alice or Bob
 is at (i, j) then they can move to (i + 1, j), (i + 1, j - 1) or (i + 1, j + 1).
 They will always stay inside the ‘GRID’. Your task is to find the maximum number
 of chocolates Ninja can collect with the help of his friends by following the
-above rules. Example: Input: ‘R’ = 3, ‘C’ = 4 ‘GRID’ = [[2, 3, 1, 2], [3, 4, 2,
-2], [5, 6, 3, 5]] Output: 21
+above rules. Example: Input: ‘R’ = 3, ‘C’ = 4 
+‘GRID’ = 
+[[2, 3, 1, 2], 
+[3, 4, 2,2], 
+[5, 6, 3, 5]] 
+Output: 21
 
 Initially Alice is at the position (0,0) he can follow the path (0,0) -> (1,1)
 -> (2,1) and will collect 2 + 4 + 6 = 12 chocolates.
