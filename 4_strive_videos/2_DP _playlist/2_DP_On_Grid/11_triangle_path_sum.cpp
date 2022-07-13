@@ -5,7 +5,7 @@ You are given a triangular array/list 'TRIANGLE'. Your task is to return the
 minimum path sum to reach from the top to the bottom row. The triangle array
 will have N rows and the i-th row, where 0 <= i < N will have i + 1 elements.
 You can move only to the adjacent number of row below each step. For example, if
-you are at index j in row i, then you can move to i or i + 1 index in row j + 1
+you are at index j in row i, then you can move to j or j + 1 index in row i + 1
 in each step. For Example : If the array given is 'TRIANGLE' = [[1], [2,3],
 [3,6,7], [8,9,6,1]] the triangle array will look like:
 

@@ -14,57 +14,43 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args) {
     cout.write(names, comma - names) << " : " << arg1 << " | ";
     __f(comma + 1, args...);
 }
-#include <bits/stdc++.h>
-using namespace std;
 
-bool detectCycleDFS(int startNode, int parentNode, vector<int> &visited,
-                    vector<vector<int>> &adjList) {
-    visited[startNode] = true;
-    for (auto nbr : adjList[startNode]) {
-        if (!visited[nbr]) {
-            bool isCycleDetected =
-                detectCycleDFS(nbr, startNode, visited, adjList);
-            if (isCycleDetected) {
-                debug("if true");
-                return true;
-            };
-        } else {
-            // if node is already visited and its not visited by its parent
-            // then we have a cycle
-            if (parentNode != -1 && nbr != parentNode) {
-                debug("else true");
-                return true;
-            };
-        }
+int mc(long long int index, long long int badKeys, long long int n,
+       long long int k, vector<long long int> &arr,
+       vector<vector<long long int>> &dp) {
+    // base case
+    if (index == n || badKeys > 30) {
+        return 0;
     }
-    return false;
+
+    if (dp[index][badKeys] != -1) {
+        return dp[index][badKeys];
+    }
+    // recursive case
+    long long int coinsToPic = arr[index] / pow(2, badKeys);
+    long long int goodKeyChosen =
+        (coinsToPic - k) + mc(index + 1, badKeys, n, k, arr, dp);
+
+    badKeys += 1;
+    coinsToPic = arr[index] / pow(2, badKeys);
+    // coinsToPic /= 2;
+
+    long long int badKeyChosen =
+        coinsToPic + mc(index + 1, badKeys, n, k, arr, dp);
+    badKeys -= 1;
+    return dp[index][badKeys] = max(goodKeyChosen, badKeyChosen);
 }
-
 void solve() {
-    int vertices, edges;
-    cin >> vertices >> edges;
-
-    vector<vector<int>> adjList(vertices, vector<int>());
-
-    for (int i = 0; i < vertices; i++) {
-        int u, v;
-        cin >> u >> v;
-        adjList[u].push_back(v);
-        adjList[v].push_back(u);
+    long long int n, k;
+    cin >> n >> k;
+    vector<long long int> arr;
+    for (long long int i = 0; i < n; i++) {
+        long long int a;
+        cin >> a;
+        arr.push_back(a);
     }
-    // check dfs cycle for every component
-    vector<int> visited(vertices, false);
-    for (int i = 0; i < vertices; i++) {
-        if (!visited[i]) {
-            if (detectCycleDFS(i, -1, visited, adjList)) {
-                cout << "True" << endl;
-                return;
-            }
-        }
-    }
-    cout << "False" << endl;
-
-    return;
+    vector<vector<long long int>> dp(n + 1, vector<long long int>(n + 1, -1));
+    cout << mc(0, 0, n, k, arr, dp) << endl;
 }
 
 int main() {

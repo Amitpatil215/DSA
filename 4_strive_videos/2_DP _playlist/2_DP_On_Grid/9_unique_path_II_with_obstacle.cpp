@@ -6,7 +6,10 @@ paths to reach the right-bottom cell from the top-left cell. A cell in the given
 maze has a value '-1' if it is a blockage or dead-end, else 0. From a given
 cell, we are allowed to move to cells (i+1, j) and (i, j+1) only. Since the
 answer can be large, print it modulo 10^9 + 7. For Example : Consider the maze
-below : 0 0 0 0 -1 0 0 0 0
+below : 
+0 0 0 
+0 -1 0 
+0 0 0
 
 There are two ways to reach the bottom left corner -
 

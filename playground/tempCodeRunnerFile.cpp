@@ -1,1 +1,1 @@
-   debug(attacker, defenser);
+coinsToPic /= 2;
