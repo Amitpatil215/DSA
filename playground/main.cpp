@@ -14,43 +14,36 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args) {
     cout.write(names, comma - names) << " : " << arg1 << " | ";
     __f(comma + 1, args...);
 }
-
-int mc(long long int index, long long int badKeys, long long int n,
-       long long int k, vector<long long int> &arr,
-       vector<vector<long long int>> &dp) {
-    // base case
-    if (index == n || badKeys > 30) {
+int maxSum(int index, int position, vector<int> &arr, vector<vector<int>> &dp) {
+    if (index >= arr.size()) {
         return 0;
     }
-
-    if (dp[index][badKeys] != -1) {
-        return dp[index][badKeys];
+    if (dp[index][position] != -1) {
+        return dp[index][position];
     }
-    // recursive case
-    long long int coinsToPic = arr[index] / pow(2, badKeys);
-    long long int goodKeyChosen =
-        (coinsToPic - k) + mc(index + 1, badKeys, n, k, arr, dp);
-
-    badKeys += 1;
-    coinsToPic = arr[index] / pow(2, badKeys);
-    // coinsToPic /= 2;
-
-    long long int badKeyChosen =
-        coinsToPic + mc(index + 1, badKeys, n, k, arr, dp);
-    badKeys -= 1;
-    return dp[index][badKeys] = max(goodKeyChosen, badKeyChosen);
+    int pick = position * arr[index] + maxSum(index + 1, position + 1, arr, dp);
+    int notPick = 0 + maxSum(index + 1, position, arr, dp);
+    return dp[index][position] = max(pick, notPick);
 }
 void solve() {
-    long long int n, k;
-    cin >> n >> k;
-    vector<long long int> arr;
-    for (long long int i = 0; i < n; i++) {
-        long long int a;
-        cin >> a;
-        arr.push_back(a);
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
     }
-    vector<vector<long long int>> dp(n + 1, vector<long long int>(n + 1, -1));
-    cout << mc(0, 0, n, k, arr, dp) << endl;
+    vector<vector<int>> dp(n + 1, vector<int>(n + 1, 0));
+    // cout << maxSum(0, 1, arr, dp) << endl;
+
+    for (int index = n - 1; index >= 0; index--) {
+        for (int position = index; position >= 1; position--) {
+            int pick = position * arr[index] + dp[index + 1][position + 1];
+            //    maxSum(index + 1, position + 1, arr, dp);
+            int notPick = 0 + dp[index + 1][position];
+            dp[index][position] = max(pick, notPick);
+        }
+    }
+    cout << dp[0][1] << endl;
 }
 
 int main() {
