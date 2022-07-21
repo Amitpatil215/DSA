@@ -62,7 +62,30 @@ That there is only one topological ordering of the numbers possible. This can be
 confirmed if we do not have more than one source at any time while finding the
 topological ordering of numbers.
 
- */
+? Input 
+3
+
+4 
+1 2 3 4
+3
+2 1 2
+2 2 3
+2 3 4
+
+4
+1 2 3 4 
+3
+2 1 2
+2 2 3
+2 2 4
+
+5
+3 1 4 2 5
+2
+3 3 1 5
+4 1 4 2 5
+
+*/
 
 #include <bits/stdc++.h>
 using namespace std;
