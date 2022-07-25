@@ -16,27 +16,9 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args) {
 }
 
 void solve() {
-    int n;
-    cin >> n;
-    priority_queue<int, vector<int>, greater<int>> pq;
-    for (int i = 0; i < n; i++) {
-        int a;
-        cin >> a;
-        if (pq.empty()) {
-            pq.push(1);
-        } else {
-            int top = pq.top();
-            debug(top, a);
-            if (a > top) {
-                pq.pop();
-                top++;
-                pq.push(top);
-            } else {
-                pq.push(1);
-            }
-        }
-    }
-    cout << pq.size() << endl;
+    string s = "amit";
+    int index = s.find("mit");
+    cout << index << endl;
 }
 
 int main() {
