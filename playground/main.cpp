@@ -15,10 +15,75 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args) {
     __f(comma + 1, args...);
 }
 
+#define INT_BITS 32
+int maxSubarrayXOR(vector<int> &set, int n) {
+    int index = 0;
+
+    for (int i = INT_BITS - 1; i >= 0; i--) {
+        int maxInd = index;
+        int maxEle = INT_MIN;
+        for (int j = index; j < n; j++) {
+            if ((set[j] & (1 << i)) != 0 && set[j] > maxEle)
+                maxEle = set[j], maxInd = j;
+        }
+
+        if (maxEle == INT_MIN) continue;
+
+        swap(set[index], set[maxInd]);
+
+        maxInd = index;
+
+        for (int j = 0; j < n; j++) {
+            if (j != maxInd && (set[j] & (1 << i)) != 0)
+                set[j] = set[j] ^ set[maxInd];
+        }
+
+        index++;
+    }
+
+    int res = 0;
+    for (int i = 0; i < n; i++) res ^= set[i];
+    return res;
+}
+
+int binomialCoefficient(int n, int k) {
+    if (k > n - k) {
+        k = n - k;
+    }
+
+    int res = 1;
+
+    for (int i = 0; i < k; i++) {
+        res = res * (n - i);
+        res = res / (i + 1);
+    }
+    return res;
+}
+
+int validParentheses(int N) {
+    if (N % 2 == 1) return 0;
+    int k = N / 2;
+    int c = binomialCoefficient(N, k);
+    return c / (k + 1);
+}
+
 void solve() {
-    string s = "amit";
-    int index = s.find("mit");
-    cout << index << endl;
+    int n, k;
+    cin >> n >> k;
+    vector<int> a;
+
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        a.push_back(x);
+    }
+
+    int noOfParanthesis = maxSubarrayXOR(a, n);
+    noOfParanthesis *= 2;
+    debug(noOfParanthesis);
+
+    int vp = validParentheses(noOfParanthesis);
+    cout << vp * k << endl;
 }
 
 int main() {
