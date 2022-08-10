@@ -16,18 +16,20 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args) {
 }
 
 void solve() {
-    int n, x, y;
-    cin >> n >> x >> y;
-    int maxi = INT_MIN;
-    for (int i = 0; i < n; i++) {
-        int a;
-        cin >> a;
-        maxi = max(maxi, a);
+    int a, b, c, d;
+
+    cin >> a >> b >> c >> d;
+    if((a-c)==(b-d)){
+        cout<<"ANY";
+
+    }else if((a-c)<(b-d)){
+        cout<<"FIRST";
+
+    }else{
+        cout<<"SECOND";
+
     }
-    int di = max(x, y);
-    int ans = maxi / di;
-    if (maxi % di != 0) ans++;
-    cout << ans << endl;
+    cout<<endl;
 }
 
 int main() {
