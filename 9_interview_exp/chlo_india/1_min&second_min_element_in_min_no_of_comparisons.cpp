@@ -1,3 +1,18 @@
+/*
+Minimum Comparisons to find Second Largest Element
+https://iq.opengenus.org/minimum-comparisons-to-find-second-largest-element/#:~:text=In%20short%2C%20the%20Minimum%20Comparisons,10%20%2D%202%20%3D%201032%20comparisons.
+
+In this article, we have demonstrated the mathematical analysis to find out the
+minimum number of Comparisons to find the second largest or the second smallest
+element. We have presented the algorithm for it as well along with other
+algorithms that look efficient but are not.
+
+In short, the Minimum Comparisons to find Second Largest Element or Second
+Smallest Element is N + logN - 2 comparisons. Hence, if there are 1024 elements,
+then we need at least 1024 + 10 - 2 = 1032 comparisons. Also, note that if we
+need to find the Largest or Smallest element, then we need at least ==1024
+comparisons. Hence, there is an increase of 8 comparisons only.
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
