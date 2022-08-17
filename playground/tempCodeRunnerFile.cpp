@@ -1,1 +1,1 @@
- || currIndex <= m
+debug
