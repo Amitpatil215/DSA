@@ -1,1 +1,1 @@
-debug
+count & (1 << i)
