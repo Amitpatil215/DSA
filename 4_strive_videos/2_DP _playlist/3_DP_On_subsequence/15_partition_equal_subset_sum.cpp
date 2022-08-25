@@ -29,7 +29,7 @@ Constraints:
 
 class Solution {
    public:
-    bool subsetSumToK(int n, int k, vector<int>& arr) {
+    bool subsetSumToK(int n, int k, vector<int>& arr) { 
         // one noteable change here we are creating boo vector of target+1 size
         // instead of (target/2 +1) which is our k it will get out of boud in
         // the second else if dp[0][arr[0]] as there may not be any array[0] in

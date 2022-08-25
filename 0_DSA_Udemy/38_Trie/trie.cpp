@@ -1,29 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Node
-{
-public:
+class Node {
+   public:
     bool isTerminal;
     Node *child[26];
 
-    Node()
-    {
+    Node() {
         isTerminal = false;
-        for (int i = 0; i < 26; i++)
-        {
+        for (int i = 0; i < 26; i++) {
             child[i] = NULL;
         }
     }
 };
 
-void add(string word, Node *trie)
-{
+void add(string word, Node *trie) {
     int n = word.size();
-    for (int i = 0; i < n; i++)
-    {
-        if (trie->child[word[i] - 'A'] == NULL)
-        {
+    for (int i = 0; i < n; i++) {
+        if (trie->child[word[i] - 'A'] == NULL) {
             trie->child[word[i] - 'A'] = new Node();
         }
         trie = trie->child[word[i] - 'A'];
@@ -31,20 +25,16 @@ void add(string word, Node *trie)
     trie->isTerminal = true;
 }
 
-bool search(string word, Node *trie)
-{
+bool search(string word, Node *trie) {
     int n = word.size();
-    for (int i = 0; i < n; i++)
-    {
-        if (trie->child[word[i] - 'A'] == NULL)
-            return false;
+    for (int i = 0; i < n; i++) {
+        if (trie->child[word[i] - 'A'] == NULL) return false;
         trie = trie->child[word[i] - 'A'];
     }
     return trie->isTerminal;
 }
 
-int main()
-{
+int main() {
     vector<string> dict;
     dict.push_back("ARE");
     dict.push_back("AS");
@@ -56,8 +46,7 @@ int main()
     dict.push_back("NOT");
 
     Node *root = new Node();
-    for (int i = 0; i < dict.size(); i++)
-    {
+    for (int i = 0; i < dict.size(); i++) {
         add(dict[i], root);
     }
 
