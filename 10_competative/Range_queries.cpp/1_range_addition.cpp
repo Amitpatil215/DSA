@@ -37,7 +37,6 @@ Sample Output
 -1 0 2 1
 
  */
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -56,57 +55,22 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args) {
 }
 
 void solve() {
-    int n, q, m;
-    cin >> n >> q >> m;
-    // generating range additon
-    vector<int> arr(n + 1, 0);
-    vector<pair<int, int>> queries;
-    for (int i = 0; i < q; i++) {
-        int l, r;
-        cin >> l >> r;
-        queries.push_back({l, r});
-        arr[l] += 1;
-        if (r + 1 < n + 1) arr[r + 1] += -1;
+    int n, k;
+    cin >> n >> k;
+    vector<int> arr(n, 0);
+    for (int i = 0; i < k; i++) {
+        int l, r, val;
+        cin >> l >> r >> val;
+        arr[l] += val;
+        if (r + 1 < n) arr[r + 1] += val * (-1);
     }
 
-    // generate prefix sum
-    vector<int> rangeAddition(n + 1, 0);
+    // find prefix sum
     int sum = 0;
-
-    for (int i = 0; i <= n; i++) {
+    for (int i = 0; i < n; i++) {
         sum += arr[i];
-        rangeAddition[i] = sum;
+        cout << sum << " ";
     }
-
-    // generate prefix count
-    int currm = 0, currm_plus1 = 0;
-    vector<int> countm(n + 1, 0), countm_plus1(n + 1, 0);
-    for (int i = 0; i <= n; i++) {
-        int val = rangeAddition[i];
-        if (val == m) {
-            currm++;
-        } else if (val == m + 1) {
-            currm_plus1++;
-        }
-        countm[i] = currm;
-        countm_plus1[i] = currm_plus1;
-    }
-
-    // check which query will give maximum number of roses
-    int maxRoses = 0;
-    int totalCountWithoutExcluding = countm[n];
-    for (int i = 0; i < queries.size(); i++) {
-        int l = queries[i].first;
-        int r = queries[i].second;
-
-        int loss = countm[r] - ((l != 0) ? countm[l - 1] : 0);
-        int gain = countm_plus1[r] - ((l != 0) ? countm_plus1[l - 1] : 0);
-
-        // total roses left after removing query i
-        int totalLeft = totalCountWithoutExcluding - loss + gain;
-        maxRoses = max(maxRoses, totalLeft);
-    }
-    cout << maxRoses;
 }
 
 int main() {
