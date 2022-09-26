@@ -15,46 +15,46 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args) {
     __f(comma + 1, args...);
 }
 
-bool isPossibleToDivide(int targetSum, vector<int> &v) {
-    int tempSum = 0;
-    for (auto a : v) {
-        tempSum += a;
-        if (tempSum == targetSum) {
-            tempSum = 0;
-        } else if (tempSum > targetSum) {
-            return false;
+struct Result {
+    Result()
+        : output1(){
+
+          };
+    int output1[100];
+};
+
+Result altTab(int input1, int input2, int input3[]) {
+    int loc;
+    Result result = Result();
+    if (input2 == 0) {
+        loc = 0;
+        for (int i = 0; i < input1; i++) {
+            result.output1[i] = input3[i];
+        }
+        return result;
+    } else {
+        loc = (input2 % input1) - 1;
+        if (loc == -1) {
+            loc = input1-1;
+        }
+        debug(loc);
+        result.output1[0] = input3[loc];
+        int k = 1;
+        for (int i = 0; i < input1; i++) {
+            if (i != loc) {
+                result.output1[k] = input3[i];
+                k++;
+            }
         }
     }
-    return true;
+    return result;
 }
-
 void solve() {
-    int n;
-    cin >> n;
-    vector<int> v(n);
-    int arraySum = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> v[i];
-        arraySum += v[i];
+    int arr[] = {4, 1, 3, 7, 6, 8, 5, 2, 10, 9};
+    Result result = altTab(10, 0, arr);
+    for (int i = 0; i < 10; i++) {
+        cout << result.output1[i] << " ";
     }
-
-    // we can devide array to at max n parts
-    // check is it possible to divide i no of segments with equal sum
-    // if possible then go in array and check does that sum actaull possible or
-    // not
-
-    // maxLength possible for now is 1 as we can combine all elements and get
-    // one elemnt at the ends
-    int maxLength = 1;
-    for (int i = 1; i <= n; i++) {
-        if (arraySum % i == 0 && isPossibleToDivide(arraySum / i, v)) {
-            maxLength = i;
-        }
-    }
-
-    cout << "length of final array " << maxLength << endl;
-    cout << "no of operations req " << n - maxLength << endl;
-    cout<<endl;
 }
 
 int main() {
