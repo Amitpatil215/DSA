@@ -27,7 +27,7 @@ int main() {
     a.sayHello();        // calls class a function
     a.sayHello("Amit");  // calls class a function
 
-    // example showing operator overlaoding
+    // example showing operator overlaodings
     A a1, a2;
     a1.val = 3;
     a2.val = 10;
