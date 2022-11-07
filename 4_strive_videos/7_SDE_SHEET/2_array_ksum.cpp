@@ -1,3 +1,36 @@
+/*
+
+https://www.pepcoding.com/resources/data-structures-and-algorithms-in-java-levelup/arrays-and-strings/k-sum-target-sum-unique-set/ojquestion
+
+K Sum - Target Sum Unique Set
+Hard  Prev   Next
+1. Given an array nums of 'n' integers and a variable 'K'.
+2. You have to return an array of all the unique set [nums[a], nums[b], nums[c],
+nums[d] . . . K Elements] such that: 2.1 a, b, c, d . . . K Elements are less
+than 'n' and greater than 0. 2.2 a,. b, c, d upto K different indexes are
+Unique. 2.3 nums[a] + nums[b] + nums[c] + nums[d] + . . . + nums[K distinct
+indexes] == target.
+3. You can return answer in any order.
+Input Format
+Input is managed for you.
+Output Format
+Output is managed for you.
+Question Video
+
+  COMMENTConstraints
+1. 1 <= nums.length <= 200
+2. -10^9 <= nums[i] <= 10^9
+3. -10^9 <= target <= 10^9
+4. 1 <= K <= nums.length
+Sample Input
+6
+-1 0 1 2 -1 -4
+0
+3
+Sample Output
+-1 -1 2
+-1 0 1
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
